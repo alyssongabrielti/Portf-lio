@@ -1,0 +1,93 @@
+Desafio 3
+JS Básico
+Crie um programa que simula um jogo de adivinhação. O programa deve gerar um número
+aleatório entre 1 e 100 e permitir que o usuário tente adivinhar o número. O programa
+deve informar se o palpite é maior ou menor que o número secreto até que o usuário
+acerte.
+Regras:
+1. O número secreto deve ser gerado aleatoriamente entre 1 e 100. ok
+2. O usuário pode fazer quantas tentativas quiser até acertar.
+3. Após cada tentativa, o programa deve exibir se o número é maior ou menor que o
+palpite.
+4. Quando o usuário acertar, o programa deve exibir uma mensagem de parabéns e o
+número de tentativas usadas.
+Dica:
+Para gerar um número aleatório em Javascript, você pode usar o código:
+Math.round(Math.random() * 100);
+Math.random() é uma função que gera um número aleatório entre 0 e 1, e multiplicando
+por um número, você pode obter valores entre 0 e o número escolhido;
+Math.round() arredonda um número para inteiro, 5.4 é arredondado para 5, e 5.5 é
+arredondado para 6
+
+ concluido
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Desafio 4
+JS Básico
+Crie um programa simples que simula um gerenciador de lista de compras. O usuário
+poderá adicionar itens à lista, remover itens e visualizar a lista de compras. O programa
+deve usar vetores (arrays) e funções para organizar o código.
+Instalando e Usando o Prompt no Node.js:
+Como estamos usando o Node.js, não temos o prompt() nativo do navegador. Para capturar
+a entrada do usuário no terminal, podemos usar a biblioteca prompt-sync.
+Passo 1: Instalar o prompt-sync
+Abra o terminal na pasta do projeto e execute o seguinte comando:
+npm install prompt-sync
+Passo 2: Importar o módulo no código
+No início do arquivo .js, importe o prompt-sync:
+const prompt = require("prompt-sync")();
+Agora podemos capturar a entrada do usuário com:
+let nome = prompt("Digite seu nome: ");
+console.log(`Olá, ${nome}!`);
+Regras:
+1. O programa deve ter um array chamado listaDeCompras que começa vazio.
+2. Deve oferecer as seguintes opções ao usuário:
+o Adicionar um item à lista.
+o Remover um item da lista.
+o Exibir os itens da lista.
+o Sair do programa.
+3. O programa deve rodar até que o usuário escolha sair.
+4. As funções devem ser utilizadas para organizar as operações principais:
+o adicionarItem(item): Adiciona um item ao array.
+o removerItem(item): Remove um item do array (se existir).
+o exibirLista(): Mostra todos os itens da lista no console.
+Dicas:
+ Use console.log() para exibir mensagens.
+ Para manter o programa rodando, utilize um loop while e um switch-case para as
+opções.
+ Você pode pesquisar na internet como usar ou como fazer alguma parte do
+programa, mas tente não usar IA para resolver o desafio, não engane a si mesmo.
+Exemplo do funcionamento:
+1 - Adicionar item
+2 - Remover item
+3 - Exibir lista
+4 - Sair
+Escolha uma opção: 1
+Digite o nome do item: pão
+Item "pão" adicionado!
+1 - Adicionar item
+2 - Remover item
+3 - Exibir lista
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Desafio 5
+JS Básico
+Crie um programa simples que permite ao usuário gerenciar um cadastro de pessoas.
+Cada pessoa terá um nome, idade e e-mail armazenados como um objeto dentro de um
+array. O usuário poderá adicionar, remover e listar os cadastros.
+Regras:
+1. O programa deve armazenar os usuários em um array de objetos, onde cada
+objeto representa uma pessoa com as propriedades:
+o nome
+o idade
+o email
+2. O usuário poderá escolher entre as seguintes opções:
+o Adicionar um novo usuário.
+o Remover um usuário pelo email.
+o Listar todos os usuários cadastrados.
+o Sair do programa.
+3. O programa deve rodar até que o usuário escolha sair.
+4. Não pode haver mais de um usuário com o mesmo e-mail.
