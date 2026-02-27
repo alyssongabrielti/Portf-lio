@@ -9,10 +9,10 @@ body {
 
 .card-container {
   width: 60vmin;
-  height: 84vmin;
+  aspect-ratio: 5 / 7;
+  height: auto;
   perspective: 1500px;
   max-width: 400px;
-  max-height: 560px;
 }
 
 .card {
