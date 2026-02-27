@@ -8,11 +8,10 @@ body {
 }
 
 .card-container {
-  width: 60vmin;
+  width: min(60vw, 80vh, 400px);
   aspect-ratio: 5 / 7;
-  height: auto;
   perspective: 1500px;
-  max-width: 400px;
+  position: relative;
 }
 
 .card {
@@ -22,6 +21,7 @@ body {
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
   cursor: pointer;
+  backface-visibility: hidden;
 }
 
 .card-container:hover .card {
