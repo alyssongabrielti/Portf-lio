@@ -15,6 +15,7 @@ header {
   position: sticky;
   top: 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 5);
+  z-index: 1000;
 }
 
 header h1 {
@@ -49,23 +50,59 @@ main {
 .videos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
+  gap: 50px;
+  padding: 40px 20px;
 }
 .card {
   background-color: #1f1f1f;
   border-radius: 8px;
   padding-bottom: 15px;
-  transition: transform 0.3s;
+  overflow: hidden;
+  transition:
+    transform 0.5s cubic-bezier(0.25.0.46, 0.45, 0.94),
+    box-shadow 0.4s ease,
+    background-color 0.3s;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
 }
+.card:hover {
+  transform: scale(1.25);
+  z-index: 99;
+  background-color: #2a2a2a;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(7, 130, 168, 0.4);
+  outline: 2px solid #0782a8;
+}
+.card:hover h3 {
+  color: #0782a8;
+}
+
 .card iframe {
   width: 100%;
   aspect-ratio: 16 / 9;
   border: none;
+  display: block;
 }
 .card h3 {
-  padding: 10px 15px 5px 15px;
+  padding: 15px 15px 5px 15px;
   margin: 0;
   font-size: 1.5rem;
+  text-align: left;
+}
+
+p {
+  text-align: justify;
+  margin: 15px 0;
+  line-height: 1.6;
+  color: #cccccc;
+}
+
+.card p {
+  padding: 0 15px 10px 15px;
+  font-size: 1rem;
+  ext-align: left;
 }
 footer {
   background-color: #141414;
