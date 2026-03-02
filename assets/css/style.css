@@ -15,10 +15,10 @@ body {
   padding: 20px;
 }
 .container {
-  background: linear-gradient(to bottom, #317907, #0f4b19);
+  background: linear-gradient(to bottom, #286603, #0f4b19);
   color: white;
-  width: 100%;
-  max-width: 600px;
+  width: 95%;
+  max-width: 850px;
   margin-top: 20px;
   border-radius: 30px;
   overflow: hidden;
@@ -26,7 +26,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 60px 60px rgba(0, 0, 0, 0.5);
   padding-bottom: 30px;
 }
 .header-image {
@@ -41,7 +41,7 @@ body {
   margin-bottom: 20px;
 }
 h1 {
-  font-size: 26px;
+  font-size: 40px;
   padding: 0 20px;
   margin-bottom: 15px;
 }
