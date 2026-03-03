@@ -5,108 +5,136 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --primary-green: #286603;
+  --dark-green: #0f4b19;
+  --bg-color: hsl(130, 80%, 12%);
+  --btn-bg: azure;
+  --text-white: #ffffff;
+}
+
 body {
-  background-color: hsl(130, 80%, 12%);
-  font-family: "Prata", serif;
+  background-color: var(--bg-color);
+  font-family: "Montserrat", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 1.25rem;
 }
+
 .container {
-  background: linear-gradient(to bottom, #286603, #0f4b19);
-  color: white;
+  background: linear-gradient(
+    to bottom,
+    var(--primary-green),
+    var(--dark-green)
+  );
+  color: var(--text-white);
   width: 95%;
   max-width: 850px;
-  margin-top: 20px;
-  border-radius: 30px;
+  margin-top: 1.25rem;
+  border-radius: 1.875rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 60px 60px rgba(0, 0, 0, 0.5);
-  padding-bottom: 30px;
+  box-shadow: 0 2.5rem 3.75rem rgba(0, 0, 0, 0.6);
+  padding-bottom: 2.5rem;
 }
+
 .header-image {
   width: 100%;
-  height: 300px;
-
+  height: 21.875rem;
   background:
-    linear-gradient(to bottom, transparent 70%, #2b730d 100%),
-    url("../images/Lobo.jpeg");
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 20px;
-}
-h1 {
-  font-size: 40px;
-  padding: 0 20px;
-  margin-bottom: 15px;
-}
-p {
-  font-size: 25px;
-  line-height: 1.6;
-  padding: 0 30px;
-  margin-bottom: 20px;
-  font-weight: 300;
+    linear-gradient(to bottom, transparent 60%, var(--primary-green) 100%),
+    url("../images/Lobo.jpeg") center/cover no-repeat;
 }
 
-main {
+h1,
+h2 {
+  font-family: "Prata", serif;
+  text-align: center;
+  padding: 0 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h1 span {
+  font-size: 1.5rem;
+  display: block;
+  opacity: 0.9;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  padding: 0 2.5rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.links-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  width: 100%;
+  gap: 1.25rem;
   align-items: center;
+  margin-top: 1.25rem;
 }
 
-main a {
+.btn {
   text-decoration: none;
-  width: 80%;
-}
-
-button {
   font-family: "Prata", serif;
-  display: inline-block;
-  padding: 12px 24px;
-  width: auto;
-  min-width: fit-content;
-  font-size: 18px;
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.938rem 1.875rem;
+  width: 80%;
+  max-width: 300px;
+  font-size: 1.125rem;
   color: #0a0a0a;
-  background-color: azure;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
+  background-color: var(--btn-bg);
+  border-radius: 0.75rem;
   position: relative;
   z-index: 1;
   overflow: hidden;
-  transition: transform 0.2s;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-button::before {
+
+.btn::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 150%;
-  height: 300%;
-
+  height: 400%;
   background: conic-gradient(transparent, #002776, #00d4ff, transparent 30%);
   z-index: -2;
   opacity: 0;
   transition: opacity 0.3s;
 }
-button::after {
+
+.btn::after {
   content: "";
   position: absolute;
-  inset: 5px;
-  background: azure;
-  border-radius: 8px;
+  inset: 0.188rem;
+  background: var(--btn-bg);
+  border-radius: 0.563rem;
   z-index: -1;
-  transition: background-color 0.3s;
 }
+
+.btn:hover {
+  transform: scale(1.08);
+}
+
+.btn:hover::before {
+  opacity: 1;
+  animation: girarBorda 2.5s linear infinite;
+}
+
 @keyframes girarBorda {
   from {
     transform: translate(-50%, -50%) rotate(0deg);
@@ -116,21 +144,43 @@ button::after {
   }
 }
 
-button:hover {
-  transform: scale(1.05);
-}
-
-button:hover::before {
-  opacity: 1;
-  animation: girarBorda 2s linear infinite;
-}
-
-button:hover::after {
-  background-color: #ffffff;
-}
-
 footer {
-  margin-top: 30px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
+  margin-top: auto;
+  padding: 1.25rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin-top: 0.625rem;
+    border-radius: 0.938rem;
+  }
+  .header-image {
+    height: 15.625rem;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+  h1 span {
+    font-size: 1.2rem;
+  }
+  p {
+    font-size: 1rem;
+    padding: 0 1.25rem;
+  }
+  .btn {
+    width: 90%;
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-image {
+    height: 12.5rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
 }
