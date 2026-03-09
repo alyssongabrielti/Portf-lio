@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  background-image: url("../images/wallpaper.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Prata", serif;
+}
+
+main {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tv {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.conteudo_image {
+  position: absolute;
+  top: 5%;
+  left: 2%;
+  height: 35%;
+  width: 20%;
+  z-index: 2;
+  border-radius: 5px;
+}
+
+.conteudo {
+  position: absolute;
+  top: 18%;
+  left: 32%;
+  right: 12%;
+  height: 38%;
+  font-weight: 600;
+  color: #000;
+  font-size: clamp(12px, 1.6vw, 20px);
+  text-align: left;
+  overflow-y: auto;
+  z-index: 2;
+  padding-right: 10px;
+}
+
+.titulo_do_conteudo {
+  display: block;
+  font-size: 1.4em;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.texto {
+  color: #333;
+  line-height: 1.4;
+}
+
+.form {
+  position: absolute;
+  bottom: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 3;
+}
+
+.input_search {
+  width: 25%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  z-index: 3;
+}
+
+.button {
+  padding: 10px 20px;
+  border: 2px solid #333;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: #eee;
+  transition: 0.2s;
+}
+
+.button:hover {
+  background-color: #ddd;
+}
+
+.button:active {
+  background-color: #2972ad;
+  color: white;
+}
