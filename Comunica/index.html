@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comunica 💭</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🗣️ Comunica</h1>
+      <p>Ajuste a voz e digite ou clique nos botões:</p>
+
+      <select id="seletorVozes">
+        <option value="">Carregando vozes...</option>
+      </select>
+
+      <textarea
+        id="texto"
+        placeholder="Digite aqui o que deseja falar..."
+      ></textarea>
+
+      <div class="controles">
+        <button id="btnFalar" class="btn-principal">🔊 Falar Texto</button>
+        <button id="btnLimpar" class="btn-secundario">🗑️ Limpar Texto</button>
+      </div>
+
+      <hr />
+
+      <div class="sessao-adicionar">
+        <input type="text" id="novaFrase" placeholder="Nova frase rápida..." />
+        <button id="btnSalvar">Adicionar +</button>
+      </div>
+
+      <div class="atalhos-container">
+        <h3>Frases Rápidas:</h3>
+        <div id="listaAtalhos" class="atalhos-grid">
+          <!-- Botões gerados via JS -->
+        </div>
+      </div>
+    </div>
+    <script src="./assets/js/comunica.js"></script>
+  </body>
+</html>

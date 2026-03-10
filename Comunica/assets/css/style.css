@@ -1,0 +1,171 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #959696;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.container {
+  background: rgba(224, 221, 221, 0.651);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 900px;
+  width: 100%;
+  min-height: 85vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+select,
+textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 120px;
+  resize: none;
+  background-color: #f9f9f9;
+}
+
+.controles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.btn-principal {
+  background-color: #28a745;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+}
+.btn-secundario {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px;
+}
+
+.sessao-adicionar {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.sessao-adicionar input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+#btnSalvar {
+  background-color: #6f42c1;
+  color: white;
+  padding: 0 20px;
+}
+
+/* --- GRID DE ATALHOS (ADAPTÁVEL PARA TEXTOS GRANDES) --- */
+.atalhos-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  justify-content: center !important;
+  margin-top: 15px !important;
+  width: 100% !important;
+}
+
+.btn-frase-wrapper {
+  position: relative !important;
+  display: inline-flex !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+.btn-fala {
+  display: block !important; /* Permite que o botão cresça para baixo */
+  width: auto !important;
+  min-width: 100px !important;
+  max-width: 350px !important; /* Largura máxima antes de quebrar linha */
+
+  background-color: #007bff !important;
+  color: white !important;
+  padding: 15px 45px 15px 15px !important;
+
+  /* Configuração para Texto Grande */
+  white-space: normal !important; /* PERMITE QUEBRA DE LINHA */
+  word-wrap: break-word !important; /* Quebra palavras longas */
+  line-height: 1.4 !important; /* Espaçamento entre linhas */
+  text-align: left !important;
+  font-size: 16px !important;
+  height: auto !important; /* Altura automática baseada no texto */
+  border-radius: 8px !important;
+}
+
+.btn-excluir {
+  position: absolute !important;
+  right: 10px !important;
+  top: 10px !important;
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  color: white !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+  padding: 0 !important;
+  z-index: 5;
+}
+
+/* --- INTERAÇÕES --- */
+.btn-fala:hover {
+  background-color: #0056b3 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.btn-excluir:hover {
+  background-color: #ff4757 !important;
+}
+
+.btn-reset {
+  margin-top: 40px;
+  background-color: transparent;
+  color: #dc3545;
+  font-size: 14px;
+  text-decoration: underline;
+  align-self: center;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 25px 0;
+}
