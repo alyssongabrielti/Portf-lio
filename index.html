@@ -4,74 +4,235 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alysson | Desenvolvedor & Segurança Cibernética</title>
-    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Prata&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <div class="container">
-      <header class="header-section">
-        <div
-          class="header-image"
-          role="img"
-          aria-label="Imagem de capa do perfil"
-        ></div>
-        <h1>Meu nome é Alysson<br /><span>Sou desenvolvedor</span></h1>
+
+  <body
+    class="d-flex flex-column min-vh-100 text-white"
+    style="background-color: rgb(15, 75, 25)"
+  >
+    <div
+      class="container my-4 p-4 rounded shadow-lg text-white"
+      style="
+        background: linear-gradient(
+          to bottom,
+          rgb(40, 102, 3),
+          rgb(15, 75, 25)
+        );
+      "
+    >
+      <header class="text-center mb-4">
+        <div class="mb-3">
+          <img
+            src="./assets/images/Lobo.jpeg"
+            alt="Foto de perfil"
+            class="img-fluid rounded-circle mx-auto d-block border border-3 shadow"
+            style="
+              width: 200px;
+              height: 200px;
+              object-fit: cover;
+              border-color: rgb(255, 255, 255);
+            "
+          />
+        </div>
+        <h1 class="fw-bold" style="font-family: &quot;Prata&quot;, serif">
+          Meu nome é Alysson <br />
+          <span class="fs-4" style="color: rgba(255, 255, 255, 0.75)"
+            >Sou desenvolvedor</span
+          >
+        </h1>
       </header>
 
-      <main>
-        <section class="bio">
-          <p>
+      <main class="flex-grow-1">
+        <section class="mb-5">
+          <p
+            class="text-center fs-5"
+            style="font-family: &quot;Montserrat&quot;, sans-serif"
+          >
             Sou formado em Análise e Desenvolvimento de Sistemas, com
             pós-graduação em Segurança Cibernética, Ciência de Dados e
             Inteligência Artificial. Minha atuação é focada em tecnologia,
             inovação, segurança da informação e liderança técnica.
           </p>
-          <p>
+          <p class="text-center fs-5">
             Atuei como cofundador de uma startup, liderando o desenvolvimento de
             uma plataforma digital com uso de IA voltada ao mercado de trabalho
             informal.
           </p>
-          <p>
+          <p class="text-center fs-5">
             Durante meu estágio na Polícia Científica do Paraná, contribuí para
             a modernização das plataformas educacionais da Academia de Ciências
             Forenses.
           </p>
         </section>
 
-        <section class="projetos">
-          <h2>Projetos & Portfólio</h2>
-          <p>Explore alguns dos componentes interativos que construí:</p>
+        <section class="mb-5">
+          <h2
+            class="text-center mb-4"
+            style="font-family: &quot;Prata&quot;, serif"
+          >
+            Serviços
+          </h2>
+          <div class="row g-4 text-center">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div
+                class="card h-100 text-white shadow"
+                style="
+                  background: linear-gradient(
+                    to bottom,
+                    rgb(40, 102, 3),
+                    rgb(15, 75, 25)
+                  );
+                "
+              >
+                <div class="card-body">
+                  <h5 class="card-title">Desenvolvimento Web</h5>
+                  <p class="card-text">
+                    Sites responsivos e modernos com foco em performance.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div
+                class="card h-100 text-white shadow"
+                style="
+                  background: linear-gradient(
+                    to bottom,
+                    rgb(40, 102, 3),
+                    rgb(15, 75, 25)
+                  );
+                "
+              >
+                <div class="card-body">
+                  <h5 class="card-title">Segurança Cibernética</h5>
+                  <p class="card-text">
+                    Práticas de segurança e proteção de dados.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div
+                class="card h-100 text-white shadow"
+                style="
+                  background: linear-gradient(
+                    to bottom,
+                    rgb(40, 102, 3),
+                    rgb(15, 75, 25)
+                  );
+                "
+              >
+                <div class="card-body">
+                  <h5 class="card-title">Inteligência Artificial</h5>
+                  <p class="card-text">
+                    Modelos de IA aplicados a soluções inovadoras.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-          <nav class="links-container">
-            <a href="./baralho/index.html" target="_blank" class="btn"
+        <section class="mb-5">
+          <h2
+            class="text-center mb-4"
+            style="font-family: &quot;Prata&quot;, serif"
+          >
+            Projetos & Portfólio
+          </h2>
+          <p class="text-center">
+            Explore alguns dos componentes interativos que construí:
+          </p>
+          <div class="d-flex flex-column align-items-center gap-3">
+            <a
+              href="./baralho/index.html"
+              target="_blank"
+              class="btn w-75"
+              style="
+                background-color: rgb(240, 255, 255);
+                color: rgb(10, 10, 10);
+              "
               >Baralho</a
             >
-            <a href="./cafeteria/index.html" target="_blank" class="btn"
+            <a
+              href="./cafeteria/index.html"
+              target="_blank"
+              class="btn w-75"
+              style="
+                background-color: rgb(240, 255, 255);
+                color: rgb(10, 10, 10);
+              "
               >Cafeteria</a
             >
-
-            <a href="./cartao/index.html" target="_blank" class="btn">Cartão</a>
+            <a
+              href="./cartao/index.html"
+              target="_blank"
+              class="btn w-75"
+              style="
+                background-color: rgb(240, 255, 255);
+                color: rgb(10, 10, 10);
+              "
+              >Cartão</a
+            >
             <a
               href="https://github.com/alyssongabrielti/Portf-lio"
               target="_blank"
-              class="btn"
+              class="btn w-75"
+              style="
+                background-color: rgb(240, 255, 255);
+                color: rgb(10, 10, 10);
+              "
               >Github</a
             >
-            <a href="https://www.linkedin.com" target="_blank" class="btn"
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              class="btn w-75"
+              style="
+                background-color: rgb(240, 255, 255);
+                color: rgb(10, 10, 10);
+              "
               >Meu LinkedIn</a
             >
-            <a href="./podcast/index.html" target="_blank" class="btn"
+            <a
+              href="./podcast/index.html"
+              target="_blank"
+              class="btn w-75"
+              style="
+                background-color: rgb(240, 255, 255);
+                color: rgb(10, 10, 10);
+              "
               >Podcast</a
             >
-            <a href="./streaming 2.0/index.html" target="_blank" class="btn"
+            <a
+              href="./streaming 2.0/index.html"
+              target="_blank"
+              class="btn w-75"
+              style="
+                background-color: rgb(240, 255, 255);
+                color: rgb(10, 10, 10);
+              "
               >Streaming 2.0</a
             >
-          </nav>
+          </div>
         </section>
       </main>
 
-      <footer>
-        <p>&copy; Alysson 2026</p>
+      <footer class="text-center mt-auto pt-3">
+        <p style="color: rgba(255, 255, 255, 0.5)">&copy; Alysson 2026</p>
       </footer>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
