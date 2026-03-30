@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sistema Escolar</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <h1>Sistema Escolar</h1>
+
+    <div id="loginArea">
+      <form id="loginForm">
+        <label>Email:</label><br />
+        <input type="text" id="email" /><br /><br />
+        <label>Senha:</label><br />
+        <input type="password" id="senha" /><br /><br />
+        <button type="submit">Entrar</button>
+      </form>
+      <p id="erro"></p>
+    </div>
+
+    <div id="perfilArea" style="display: none">
+      <h3>Perfil do Usuário</h3>
+      <div id="perfil"></div>
+      <button id="logout">Sair</button>
+    </div>
+
+    <script src="./assets/js/escola.js"></script>
+  </body>
+</html>
