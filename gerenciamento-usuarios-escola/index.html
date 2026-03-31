@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR" ng-app="CadastroApp">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cadastro Escolar</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body ng-controller="AppController">
+    <h1 ng-bind="mensagem"></h1>
+
+    <div ng-repeat="usuario in usuarios">
+      <h3>{{usuario.nome}} - {{usuario.tipo}}</h3>
+
+      <img
+        ng-src="{{usuario.imagem}}"
+        alt="Foto de {{usuario.nome}}"
+        width="120"
+      />
+
+      <hr />
+    </div>
+
+    <script>
+      angular
+        .module("CadastroApp", [])
+        .controller("AppController", function ($scope) {
+          $scope.mensagem = "Bem-vindo ao sistema de cadastro escolar";
+
+          $scope.usuarios = [
+            {
+              nome: "Baby Yoda",
+              tipo: "Aluno",
+              imagem: "./assets/img/baby.jpg",
+            },
+            {
+              nome: "Mandalorian",
+              tipo: "Professor",
+              imagem: "./assets/img/mandalorian.jpg",
+            },
+          ];
+        });
+    </script>
+  </body>
+</html>
