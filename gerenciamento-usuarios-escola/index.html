@@ -5,91 +5,82 @@
     <title>Cadastro Escolar</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="./assets/js/cadastro.js"></script>
-    <style>
-      .erro {
-        color: red;
-        font-size: 0.9em;
-      }
-      .sucesso {
-        color: green;
-        font-weight: bold;
-      }
-      .loading {
-        font-style: italic;
-        color: blue;
-      }
-      img {
-        border-radius: 8px;
-        margin-top: 5px;
-      }
-    </style>
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body ng-controller="AppController">
     <h1 ng-bind="mensagem"></h1>
 
-    <form name="cadastroForm" ng-submit="adicionarUsuario()" novalidate>
-      <input
-        type="text"
-        ng-model="novoUsuario.nome"
-        name="nome"
-        placeholder="Nome"
-        required
-      />
-      <span
-        class="erro"
-        ng-show="cadastroForm.nome.$error.required && cadastroForm.nome.$touched"
-      >
-        Nome é obrigatório
-      </span>
+    <button ng-click="abrirModal()">Novo Usuário</button>
 
-      <input
-        type="email"
-        ng-model="novoUsuario.email"
-        name="email"
-        placeholder="Email"
-        required
-      />
-      <span
-        class="erro"
-        ng-show="cadastroForm.email.$error.required && cadastroForm.email.$touched"
-      >
-        Email é obrigatório
-      </span>
-      <span
-        class="erro"
-        ng-show="cadastroForm.email.$error.email && cadastroForm.email.$touched"
-      >
-        Email inválido
-      </span>
+    <div class="modal" ng-show="modalAberto">
+      <div class="modal-conteudo">
+        <h2>Cadastrar Usuário</h2>
+        <form name="cadastroForm" ng-submit="adicionarUsuario()" novalidate>
+          <input
+            type="text"
+            ng-model="novoUsuario.nome"
+            name="nome"
+            placeholder="Nome"
+            required
+          />
+          <span
+            class="erro"
+            ng-show="cadastroForm.nome.$error.required && cadastroForm.nome.$touched"
+          >
+            *
+          </span>
 
-      <select ng-model="novoUsuario.tipo" name="tipo" required>
-        <option value="">Selecione...</option>
-        <option value="Aluno">Aluno</option>
-        <option value="Professor">Professor</option>
-      </select>
-      <span
-        class="erro"
-        ng-show="cadastroForm.tipo.$error.required && cadastroForm.tipo.$touched"
-      >
-        Tipo é obrigatório
-      </span>
+          <input
+            type="email"
+            ng-model="novoUsuario.email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+          <span
+            class="erro"
+            ng-show="cadastroForm.email.$error.required && cadastroForm.email.$touched"
+          >
+            *
+          </span>
+          <span
+            class="erro"
+            ng-show="cadastroForm.email.$error.email && cadastroForm.email.$touched"
+          >
+            Email inválido
+          </span>
 
-      <input
-        type="file"
-        name="imagem"
-        accept="image/*"
-        onchange="angular.element(this).scope().carregarImagem(this)"
-      />
+          <select ng-model="novoUsuario.tipo" name="tipo" required>
+            <option value="">Selecione...</option>
+            <option value="Aluno">Aluno</option>
+            <option value="Professor">Professor</option>
+          </select>
+          <span
+            class="erro"
+            ng-show="cadastroForm.tipo.$error.required && cadastroForm.tipo.$touched"
+          >
+            *
+          </span>
 
-      <div ng-if="novoUsuario.imagem">
-        <p>Pré-visualização:</p>
-        <img ng-src="{{novoUsuario.imagem}}" alt="Preview" width="120" />
+          <input
+            type="file"
+            name="imagem"
+            accept="image/*"
+            onchange="angular.element(this).scope().carregarImagem(this)"
+          />
+
+          <div ng-if="novoUsuario.imagem">
+            <p>Pré-visualização:</p>
+            <img ng-src="{{novoUsuario.imagem}}" alt="Preview" width="120" />
+          </div>
+
+          <button type="submit" ng-disabled="salvando || cadastroForm.$invalid">
+            {{ salvando ? "Salvando..." : "Salvar" }}
+          </button>
+          <button type="button" ng-click="fecharModal()">Cancelar</button>
+        </form>
       </div>
-
-      <button type="submit" ng-disabled="salvando || cadastroForm.$invalid">
-        {{ salvando ? "Salvando..." : "Adicionar" }}
-      </button>
-    </form>
+    </div>
 
     <p class="sucesso" ng-show="mensagemSucesso">{{mensagemSucesso}}</p>
     <p class="loading" ng-show="salvando">Carregando...</p>
@@ -103,7 +94,6 @@
 
     <div ng-controller="ListaController">
       <h2>Lista de Usuários</h2>
-
       <div
         ng-repeat="usuario in usuarios | filter:filtro | filter:{tipo:filtroTipo}"
       >
@@ -118,7 +108,6 @@
         <button ng-click="removerUsuario($index)">Remover</button>
         <hr />
       </div>
-
       <p>Total de Alunos: {{ (usuarios | filter:{tipo:'Aluno'}).length }}</p>
       <p>
         Total de Professores: {{ (usuarios | filter:{tipo:'Professor'}).length

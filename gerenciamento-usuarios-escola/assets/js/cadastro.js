@@ -47,11 +47,9 @@ angular
       return $q(function (resolve) {
         $timeout(function () {
           usuario.dataCadastro = new Date();
-
           if (!usuario.imagem || usuario.imagem.trim() === "") {
             usuario.imagem = "./assets/img/User.png";
           }
-
           usuarios.push(usuario);
           resolve("Usuário cadastrado com sucesso!");
         }, 2000);
@@ -68,6 +66,16 @@ angular
     $scope.novoUsuario = {};
     $scope.salvando = false;
     $scope.mensagemSucesso = "";
+    $scope.modalAberto = false;
+
+    $scope.abrirModal = function () {
+      $scope.modalAberto = true;
+      $scope.novoUsuario = {};
+    };
+
+    $scope.fecharModal = function () {
+      $scope.modalAberto = false;
+    };
 
     $scope.carregarImagem = function (input) {
       if (input.files && input.files[0]) {
@@ -100,13 +108,13 @@ angular
           $scope.novoUsuario = {};
           $scope.cadastroForm.$setPristine();
           $scope.cadastroForm.$setUntouched();
+          $scope.fecharModal();
         });
       }
     };
   })
   .controller("ListaController", function ($scope, UsuarioService) {
     $scope.usuarios = UsuarioService.listar();
-
     $scope.removerUsuario = function (index) {
       UsuarioService.remover(index);
     };
