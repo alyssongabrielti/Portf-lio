@@ -8,6 +8,25 @@
   <body ng-controller="AppController">
     <h1 ng-bind="mensagem"></h1>
 
+    <form ng-submit="adicionarUsuario()">
+      <input
+        type="text"
+        ng-model="novoUsuario.nome"
+        placeholder="Novo usuario"
+        required
+      />
+      <select ng-model="novoUsuario.tipo" required>
+        <option value="Aluno">Aluno</option>
+        <option value="Professor">Professor</option>
+      </select>
+      <input
+        type="text"
+        ng-model="novoUsuario.imagem"
+        placeholder="URL da imagem"
+      />
+      <button type="submit">Adicionar</button>
+    </form>
+
     <input type="text" ng-model="filtro" placeholder="Buscar usuário..." />
     <select ng-model="filtroTipo">
       <option value="">Todos</option>
@@ -22,14 +41,13 @@
         ng-repeat="usuario in usuarios | filter:filtro | filter:{tipo:filtroTipo}"
       >
         <h3>{{usuario.nome | uppercase}} - {{usuario.tipo}}</h3>
-
         <img
           ng-src="{{usuario.imagem}}"
           alt="Foto de {{usuario.nome}}"
           width="120"
         />
-
         <p>Data de Cadastro: {{usuario.dataCadastro | date:'dd/MM/yyyy'}}</p>
+        <button ng-click="removerUsuario($index)">Remover</button>
         <hr />
       </div>
 
@@ -43,10 +61,8 @@
     <script>
       angular
         .module("CadastroApp", [])
-        .controller("AppController", function ($scope) {
-          $scope.mensagem = "Bem-vindo ao sistema de cadastro escolar";
-
-          $scope.usuarios = [
+        .service("UsuarioService", function () {
+          var usuarios = [
             {
               nome: "Baby Yoda",
               tipo: "Aluno",
@@ -78,8 +94,40 @@
               dataCadastro: new Date(2026, 2, 25),
             },
           ];
+
+          this.listar = function () {
+            return usuarios;
+          };
+
+          this.adicionar = function (usuario) {
+            usuario.dataCadastro = new Date();
+            usuarios.push(usuario);
+          };
+
+          this.remover = function (index) {
+            usuarios.splice(index, 1);
+          };
         })
-        .controller("ListaController", function ($scope) {});
+        .controller("AppController", function ($scope, UsuarioService) {
+          $scope.mensagem = "Bem-vindo ao sistema de cadastro escolar";
+          $scope.usuarios = UsuarioService.listar();
+
+          $scope.novoUsuario = {};
+
+          $scope.adicionarUsuario = function () {
+            if ($scope.novoUsuario.nome && $scope.novoUsuario.tipo) {
+              UsuarioService.adicionar($scope.novoUsuario);
+              $scope.novoUsuario = {};
+            }
+          };
+        })
+        .controller("ListaController", function ($scope, UsuarioService) {
+          $scope.usuarios = UsuarioService.listar();
+
+          $scope.removerUsuario = function (index) {
+            UsuarioService.remover(index);
+          };
+        });
     </script>
   </body>
 </html>
