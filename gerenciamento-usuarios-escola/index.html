@@ -8,16 +8,36 @@
   <body ng-controller="AppController">
     <h1 ng-bind="mensagem"></h1>
 
-    <div ng-repeat="usuario in usuarios">
-      <h3>{{usuario.nome}} - {{usuario.tipo}}</h3>
+    <input type="text" ng-model="filtro" placeholder="Buscar usuário..." />
+    <select ng-model="filtroTipo">
+      <option value="">Todos</option>
+      <option value="Aluno">Aluno</option>
+      <option value="Professor">Professor</option>
+    </select>
 
-      <img
-        ng-src="{{usuario.imagem}}"
-        alt="Foto de {{usuario.nome}}"
-        width="120"
-      />
+    <div ng-controller="ListaController">
+      <h2>Lista de Usuários</h2>
 
-      <hr />
+      <div
+        ng-repeat="usuario in usuarios | filter:filtro | filter:{tipo:filtroTipo}"
+      >
+        <h3>{{usuario.nome | uppercase}} - {{usuario.tipo}}</h3>
+
+        <img
+          ng-src="{{usuario.imagem}}"
+          alt="Foto de {{usuario.nome}}"
+          width="120"
+        />
+
+        <p>Data de Cadastro: {{usuario.dataCadastro | date:'dd/MM/yyyy'}}</p>
+        <hr />
+      </div>
+
+      <p>Total de Alunos: {{ (usuarios | filter:{tipo:'Aluno'}).length }}</p>
+      <p>
+        Total de Professores: {{ (usuarios | filter:{tipo:'Professor'}).length
+        }}
+      </p>
     </div>
 
     <script>
@@ -31,14 +51,35 @@
               nome: "Baby Yoda",
               tipo: "Aluno",
               imagem: "./assets/img/baby.jpg",
+              dataCadastro: new Date(2026, 2, 10),
             },
             {
               nome: "Mandalorian",
               tipo: "Professor",
               imagem: "./assets/img/mandalorian.jpg",
+              dataCadastro: new Date(2026, 2, 12),
+            },
+            {
+              nome: "Luke Skywalker",
+              tipo: "Aluno",
+              imagem: "./assets/img/LUKE SKYWALKER.jpg",
+              dataCadastro: new Date(2026, 2, 15),
+            },
+            {
+              nome: "Leia Organa",
+              tipo: "Professor",
+              imagem: "./assets/img/LEIA ORGANA.jpeg",
+              dataCadastro: new Date(2026, 2, 20),
+            },
+            {
+              nome: "Han Solo",
+              tipo: "Aluno",
+              imagem: "./assets/img/HAN SOLO.jpeg",
+              dataCadastro: new Date(2026, 2, 25),
             },
           ];
-        });
+        })
+        .controller("ListaController", function ($scope) {});
     </script>
   </body>
 </html>
