@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Automação de Luzes</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <h1>Central de Comando</h1>
+
+    <div class="comodo" id="quarto">Quarto</div>
+    <button data-comodo="quarto" data-acao="ligar">Ligar Quarto</button>
+    <button data-comodo="quarto" data-acao="desligar">Desligar Quarto</button>
+
+    <div class="comodo" id="sala">Sala</div>
+    <button data-comodo="sala" data-acao="ligar">Ligar Sala</button>
+    <button data-comodo="sala" data-acao="desligar">Desligar Sala</button>
+
+    <div class="comodo" id="cozinha">Cozinha</div>
+    <button data-comodo="cozinha" data-acao="ligar">Ligar Cozinha</button>
+    <button data-comodo="cozinha" data-acao="desligar">Desligar Cozinha</button>
+
+    <div class="comodo" id="Sala de jogos">Sala de jogos</div>
+    <button data-comodo="Sala de jogos" data-acao="ligar">
+      Ligar Sala de jogos
+    </button>
+    <button data-comodo="Sala de jogos" data-acao="desligar">
+      Desligar Sala de jogos
+    </button>
+
+    <p id="status"></p>
+
+    <script src="./assets/js/automacao.js"></script>
+  </body>
+</html>
