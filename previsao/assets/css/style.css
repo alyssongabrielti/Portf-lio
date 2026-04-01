@@ -1,0 +1,129 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  font-size: 62.5%;
+}
+body {
+  height: 100vh;
+  font-size: 1.6rem;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: #050505;
+  background: url(../img/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: none;
+}
+
+.card.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 30rem;
+  padding: 2.4rem;
+  border-radius: 1.6rem;
+  background-color: rgba(240, 248, 255, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 0.1rem solid rgba(240, 248, 255, 0.3);
+  gap: 0.8rem;
+}
+
+.city {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  width: 20.1rem;
+  height: 20.1rem;
+  margin: 0 auto;
+}
+
+.card h2 {
+  text-align: center;
+  font-size: 5rem;
+}
+
+.feels-like,
+.humidity {
+  text-align: center;
+}
+
+.min-max {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.wind {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  gap: 0.8rem;
+}
+.wind img {
+  background-color: #fff;
+  padding: 0.4rem;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+}
+
+.input {
+  display: flex;
+  margin-top: 1.6rem;
+  gap: 0.8rem;
+  width: 90%;
+  max-width: 30rem;
+}
+.input input {
+  flex: 1;
+  background-color: rgba(240, 248, 255, 0.2);
+  border: 0.1rem solid rgba(240, 248, 255, 0.3);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: #ffffff;
+  padding: 1.6rem;
+  border-radius: 1.6rem 0 0 1.6rem;
+  font-size: 1.6rem;
+}
+
+.input input::placeholder {
+  color: #050505;
+  opacity: 0.8;
+}
+
+.input button {
+  border: 0;
+  background-color: rgb(55, 127, 221);
+  padding: 1.6rem;
+  font-size: 1.6rem;
+  border-radius: 0 1.6rem 1.6rem 0;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.input button:hover {
+  background-color: rgb(9, 88, 190);
+}
+
+.input button:active {
+  background-color: rgb(4, 48, 104);
+}

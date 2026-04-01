@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app="weatherApp" lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Previsão do tempo</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=Prata&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+  </head>
+  <body ng-controller="weatherController">
+    <section class="card" ng-class="{active: cardActive}">
+      <h3 class="city">{{ cityDisplay }}</h3>
+      <img class="icon" ng-src="{{ iconUrl }}" alt="Ícone do clima" />
+      <h2>{{ temperature }}</h2>
+      <p class="feels-like">Sensação térmica de {{ feelslike }}</p>
+      <div class="min-max">
+        <p>Min: {{ minTemperature }}</p>
+        <p>Max: {{ maxTemperature }}</p>
+      </div>
+      <p class="humidity">Umidade: {{ humidity }}</p>
+      <div class="wind">
+        <img
+          src="./assets/img/arrow.png"
+          alt="Seta direção do vento"
+          ng-style="{ transform: 'rotate(' + windOrientation + 'deg)' }"
+        />
+        <p>Velocidade do vento: {{ windVelocity }}</p>
+      </div>
+    </section>
+
+    <section class="input">
+      <input
+        type="text"
+        ng-model="cityInput"
+        placeholder="Busque uma cidade"
+        ng-keypress="$event.keyCode == 13 && callApi()"
+      />
+      <button type="button" ng-click="callApi()">Buscar</button>
+    </section>
+  </body>
+</html>
