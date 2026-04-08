@@ -1,5 +1,4 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
 import {
   getFirestore,
   doc,
@@ -18,161 +17,240 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const db = getFirestore(app);
-
-const nomesHumor = { 1: "Triste", 2: "Neutro", 3: "Feliz", 4: "Muito Feliz" };
 let habitos = [];
 let registros = [];
-let graficoHumor;
+let grafico;
 
-const listaHabitos = document.querySelector("#lista-habitos");
-const formHabito = document.querySelector("#form-habito");
-const inputHabito = document.querySelector("#novo-habito");
-const registrosContainer = document.querySelector("#registros");
-const containerHabitos = document.querySelector(".Habitos");
-let contadorDiv = document.querySelector("#contador-habitos");
+document.addEventListener("DOMContentLoaded", () => {
+  const listaHabitos = document.querySelector("#lista-habitos");
+  const formHabito = document.querySelector("#form-habito");
+  const inputHabito = document.querySelector("#novo-habito");
+  const formHumor = document.querySelector("#form-humor");
+  const registrosContainer = document.querySelector("#registros");
+  const nomesHumor = { 1: "Triste", 2: "Neutro", 3: "Feliz", 4: "Muito Feliz" };
+  const emojis = { 1: "😢", 2: "😐", 3: "🙂", 4: "😁" };
+  const diasSemana = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
-if (!contadorDiv && containerHabitos) {
-  contadorDiv = document.createElement("div");
-  contadorDiv.id = "contador-habitos";
-  containerHabitos.appendChild(contadorDiv);
-}
-
-class Humor {
-  constructor(data, nivel, observacao = "") {
-    this.data = data;
-    this.nivel = Number(nivel);
-    this.observacao = observacao;
-  }
-  getEmoji() {
-    const emojis = { 1: "😢", 2: "😐", 3: "😊", 4: "😁" };
-    return emojis[this.nivel] || "❓";
-  }
-}
-
-class Habito {
-  constructor(nome, status = "pendente") {
-    const agora = new Date().toLocaleString("pt-BR");
-    this.nome = nome;
-    this.status = status;
-    this.criadoEm = agora;
-    this.historico = [{ status: status, horario: agora }];
-  }
-}
-
-const salvarNoFirebase = async () => {
-  try {
-    await setDoc(doc(db, "usuarios", "meu_id_unico"), {
-      habitos: habitos,
-      registros: registros,
-    });
-    console.log("Dados sincronizados com o Firebase!");
-  } catch (e) {
-    console.error("Erro ao salvar no Firebase:", e);
-  }
-};
-
-const carregarDadosFirebase = async () => {
-  try {
-    const docSnap = await getDoc(doc(db, "usuarios", "meu_id_unico"));
-    if (docSnap.exists()) {
-      const dados = docSnap.data();
-      habitos = dados.habitos || [];
-      registros = dados.registros || [];
-      renderizarHabitos();
-      renderizarRegistros();
-      if (typeof atualizarGrafico === "function") atualizarGrafico();
+  class Habito {
+    constructor(nome) {
+      const agora = new Date().toLocaleString("pt-BR");
+      this.nome = nome;
+      this.status = "pendente";
+      this.criadoEm = agora;
+      this.historico = [{ status: "pendente", horario: agora }];
     }
-  } catch (e) {
-    console.error("Erro ao carregar do Firebase:", e);
   }
-};
 
-function renderizarHabitos() {
-  if (!listaHabitos) return;
-  listaHabitos.innerHTML = "";
+  const salvarNoFirebase = async () => {
+    try {
+      await setDoc(doc(db, "usuarios", "meu_id_unico"), { habitos, registros });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-  habitos.forEach((h, index) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <div class="info-habito">
-        <span class="nome">${h.nome}</span>
-        <small class="data-criacao">Criado em: ${h.criadoEm || "n/a"}</small>
-      </div>
-      <span class="badge ${h.status}">${h.status}</span>
-      <select class="select-status">
-        <option value="pendente" ${h.status === "pendente" ? "selected" : ""}>Pendente</option>
-        <option value="andamento" ${h.status === "andamento" ? "selected" : ""}>Andamento</option>
-        <option value="concluido" ${h.status === "concluido" ? "selected" : ""}>Concluído</option>
-      </select>
-      <button class="editar">✏️</button>
-      <button class="excluir">🗑️</button>
-    `;
+  const carregarDadosFirebase = async () => {
+    try {
+      const snap = await getDoc(doc(db, "usuarios", "meu_id_unico"));
+      if (snap.exists()) {
+        const dados = snap.data();
+        habitos = dados.habitos || [];
+        registros = dados.registros || [];
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    renderizarHabitos();
+    renderizarRegistros();
+    atualizarGrafico();
+  };
 
-    li.querySelector(".select-status").onchange = async (e) => {
-      const novoStatus = e.target.value;
-      h.status = novoStatus;
-      h.historico.push({
-        status: novoStatus,
-        horario: new Date().toLocaleString("pt-BR"),
+  function renderizarHabitos() {
+    listaHabitos.innerHTML = "";
+    habitos.forEach((h, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <div class="info-habito">
+          <span class="nome">${h.nome}</span>
+          <small class="data-criacao">Criado em: ${h.criadoEm}</small>
+        </div>
+        <span class="badge ${h.status}">${h.status}</span>
+      `;
+      const select = document.createElement("select");
+      ["pendente", "andamento", "concluido"].forEach((s) => {
+        const opt = document.createElement("option");
+        opt.value = s;
+        opt.textContent = s;
+        if (h.status === s) opt.selected = true;
+        select.appendChild(opt);
       });
-      await salvarNoFirebase();
-      renderizarHabitos();
-    };
-
-    li.querySelector(".editar").onclick = async () => {
-      const novoNome = prompt("Editar hábito:", h.nome);
-      if (novoNome?.trim()) {
-        h.nome = novoNome.trim();
+      select.onchange = async (e) => {
+        const agora = new Date().toLocaleString("pt-BR");
+        h.status = e.target.value;
+        h.historico.push({ status: h.status, horario: agora });
         await salvarNoFirebase();
         renderizarHabitos();
-      }
-    };
+      };
+      const btnEditar = document.createElement("button");
+      btnEditar.textContent = "✏️";
+      btnEditar.onclick = async () => {
+        const novo = prompt("Editar hábito:", h.nome);
+        if (novo) {
+          h.nome = novo;
+          await salvarNoFirebase();
+          renderizarHabitos();
+        }
+      };
+      const btnExcluir = document.createElement("button");
+      btnExcluir.textContent = "🗑️";
+      btnExcluir.onclick = async () => {
+        if (confirm("Excluir hábito?")) {
+          habitos.splice(index, 1);
+          await salvarNoFirebase();
+          renderizarHabitos();
+        }
+      };
+      li.appendChild(select);
+      li.appendChild(btnEditar);
+      li.appendChild(btnExcluir);
+      listaHabitos.appendChild(li);
+    });
+    atualizarContador();
+  }
 
-    li.querySelector(".excluir").onclick = async () => {
-      habitos.splice(index, 1);
-      await salvarNoFirebase();
-      renderizarHabitos();
-    };
+  function atualizarContador() {
+    let contador = document.querySelector("#contador-habitos");
+    if (!contador) {
+      contador = document.createElement("div");
+      contador.id = "contador-habitos";
+      document.querySelector(".Habitos").appendChild(contador);
+    }
+    const total = habitos.length;
+    const concluido = habitos.filter((h) => h.status === "concluido").length;
+    contador.innerHTML = `Total: ${total} | Concluídos: ${concluido}`;
+  }
 
-    listaHabitos.appendChild(li);
+  function renderizarRegistros(lista = registros) {
+    registrosContainer.innerHTML = "";
+    lista
+      .slice()
+      .reverse()
+      .forEach((r) => {
+        const div = document.createElement("div");
+        div.className = "registro";
+        div.innerHTML = `
+        <div class="registro-header">
+          <strong>${r.data}${r.hora ? " " + r.hora : ""}</strong>
+          <span class="nome-humor humor-${r.nivel}">${emojis[r.nivel]} ${nomesHumor[r.nivel]}</span>
+        </div>
+        ${r.observacao ? `<span class="registro-obs">${r.observacao}</span>` : ""}
+      `;
+        registrosContainer.appendChild(div);
+      });
+  }
+
+  document.querySelectorAll(".humor-icons figure").forEach((fig) => {
+    fig.addEventListener("click", () => {
+      document.querySelector("#nivel-humor").value = fig.dataset.nivel;
+      document
+        .querySelectorAll(".humor-icons figure")
+        .forEach((f) => f.classList.remove("selecionado"));
+      fig.classList.add("selecionado");
+    });
   });
-  atualizarContador();
-}
 
-function atualizarContador() {
-  if (!contadorDiv) return;
-  const stats = {
-    total: habitos.length,
-    concluido: habitos.filter((h) => h.status === "concluido").length,
-  };
-  contadorDiv.innerHTML = `<p>Total: ${stats.total} | Concluídos: ${stats.concluido}</p>`;
-}
-
-function renderizarRegistros(listaParaExibir = registros) {
-  if (!registrosContainer) return;
-  registrosContainer.innerHTML = "";
-  [...listaParaExibir].reverse().forEach((r) => {
-    const humorObj = new Humor(r.data, r.humor.nivel, r.humor.observacao);
-    const div = document.createElement("div");
-    div.className = "registro";
-    div.innerHTML = `
-      <strong>${r.data}</strong> - Humor: ${humorObj.getEmoji()} ${nomesHumor[r.humor.nivel]}
-    `;
-    registrosContainer.appendChild(div);
+  formHumor?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const now = new Date();
+    const data = now.toISOString().split("T")[0];
+    const hora = now.toLocaleTimeString("pt-BR");
+    const nivel = document.querySelector("#nivel-humor").value;
+    const obs = document.querySelector("#observacao-humor").value;
+    if (!nivel) return alert("Selecione um humor!");
+    registros.push({ data, hora, nivel: Number(nivel), observacao: obs });
+    formHumor.reset();
+    document
+      .querySelectorAll(".humor-icons figure")
+      .forEach((f) => f.classList.remove("selecionado"));
+    await salvarNoFirebase();
+    renderizarRegistros();
+    atualizarGrafico();
   });
-}
 
-formHabito?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const nome = inputHabito.value.trim();
-  if (nome) {
+  document.querySelector("#aplicar-filtro")?.addEventListener("click", () => {
+    const data = document.querySelector("#filtro-data").value;
+    const humor = document.querySelector("#filtro-humor").value;
+    let filtrados = registros;
+    if (data) filtrados = filtrados.filter((r) => r.data === data);
+    if (humor) filtrados = filtrados.filter((r) => r.nivel == humor);
+    renderizarRegistros(filtrados);
+  });
+
+  function atualizarGrafico() {
+    const ctx = document.getElementById("graficoHumor");
+    if (!ctx) return;
+    const ultimos = registros.slice(-7);
+    const labels = ultimos.map((r) => diasSemana[new Date(r.data).getDay()]);
+    const dados = ultimos.map((r) => r.nivel);
+    try {
+      if (grafico) grafico.destroy();
+      grafico = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Humor",
+              data: dados,
+              borderColor: "#32cd32",
+              backgroundColor: "rgba(50,205,50,0.2)",
+              tension: 0.3,
+              fill: true,
+              pointRadius: 8,
+              pointHoverRadius: 10,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              min: 1,
+              max: 4,
+              ticks: {
+                stepSize: 1,
+                callback: (v) =>
+                  ["Triste", "Neutro", "Feliz", "Muito Feliz"][v - 1],
+              },
+            },
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const val = ctx.parsed.y;
+                  return `${emojis[val]} ${nomesHumor[val]}`;
+                },
+              },
+            },
+          },
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  formHabito?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const nome = inputHabito.value.trim();
+    if (!nome) return;
     habitos.push(new Habito(nome));
     inputHabito.value = "";
     await salvarNoFirebase();
     renderizarHabitos();
-  }
-});
+  });
 
-carregarDadosFirebase();
+  carregarDadosFirebase();
+});
