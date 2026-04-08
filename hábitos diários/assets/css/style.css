@@ -1,0 +1,316 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #222 url("../img/background.png") no-repeat center/cover fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Prata", serif, Arial, sans-serif;
+  color: #fff;
+  line-height: 1.5;
+}
+
+header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.titulo {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.subtitulo {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+main.grid-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.Humor,
+.Habitos,
+.Grafico,
+.ListaRegistros,
+.Filtros {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.humor-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.humor-icons figure {
+  cursor: pointer;
+  transition: transform 0.3s;
+  text-align: center;
+  padding: 5px;
+}
+
+.humor-icons figure:hover {
+  transform: scale(1.2);
+}
+
+.humor-icons figure.selecionado {
+  border: 2px solid #32cd32;
+  border-radius: 10px;
+  background: rgba(50, 205, 50, 0.1);
+}
+
+.Humor img {
+  width: 60px;
+  height: 60px;
+}
+
+.Humor textarea,
+.Humor input[type="date"],
+.Filtros input,
+.Filtros select {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background: #333;
+  color: #fff;
+}
+
+.Habitos h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.Habitos form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.Habitos input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background: #333;
+  color: #fff;
+}
+
+#lista-habitos {
+  list-style: none;
+}
+
+#lista-habitos li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  border-left: 4px solid #32cd32;
+  transition:
+    transform 0.2s,
+    background 0.3s;
+}
+
+#lista-habitos li:hover {
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.info-habito .nome {
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: block;
+}
+
+.data-criacao {
+  display: block;
+  font-size: 0.75rem;
+  color: #32cd32;
+  margin-top: 4px;
+}
+
+.badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.badge.pendente {
+  background: #555;
+  color: #fff;
+}
+.badge.andamento {
+  background: #ffd700;
+  color: #000;
+}
+.badge.concluido {
+  background: #32cd32;
+  color: #fff;
+}
+
+#contador-habitos {
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #444;
+  text-align: center;
+}
+
+.stats-texto {
+  font-size: 0.9rem;
+}
+
+#lista-habitos select {
+  padding: 5px;
+  border-radius: 5px;
+  background: #444;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.Habitos button,
+.Humor button,
+.Filtros button {
+  background: #32cd32;
+  color: #fff;
+}
+
+button.editar {
+  background: #ffd700;
+  color: #000;
+  margin-left: 5px;
+}
+button.excluir {
+  background: #ff4500;
+  color: #fff;
+  margin-left: 5px;
+}
+
+button:hover {
+  opacity: 0.8;
+  transform: translateY(-2px);
+}
+button:active {
+  transform: scale(0.95);
+}
+
+.Grafico canvas {
+  width: 100% !important;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 20px 15px 15px 30px;
+}
+
+#registros .registro {
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid #ffd700;
+}
+
+.registro-header {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.nome-humor {
+  font-weight: bold;
+  margin-left: 5px;
+}
+.humor-1 {
+  color: #ff4d4d;
+}
+.humor-2 {
+  color: #aaa;
+}
+.humor-3 {
+  color: #4dff4d;
+}
+.humor-4 {
+  color: #00ffff;
+}
+
+.registro-obs {
+  color: #ffd700;
+  font-style: italic;
+  display: block;
+  margin-top: 5px;
+}
+
+.registro-lista-habitos {
+  list-style: none;
+  font-size: 0.85rem;
+  color: #ccc;
+  padding-left: 5px;
+  margin-top: 10px;
+}
+
+.registro-lista-habitos li strong {
+  color: #32cd32;
+}
+
+.registro-lista-habitos ul {
+  list-style: none;
+  padding-left: 15px;
+  border-left: 1px dashed #555;
+  margin: 5px 0 10px 0;
+}
+
+.registro-lista-habitos ul li {
+  font-size: 1rem;
+  color: #fcfcfc;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  main.grid-layout {
+    grid-template-columns: 1fr;
+  }
+  .titulo {
+    font-size: 1.8rem;
+  }
+  footer {
+    position: relative;
+  }
+}

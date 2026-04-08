@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hábitos Diários</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 class="titulo">Monitore seu Humor & Hábitos</h1>
+      <p class="subtitulo">Acompanhe seu bem-estar e sua rotina diária!</p>
+    </header>
+
+    <main class="grid-layout">
+      <div class="col-esquerda">
+        <section class="Humor">
+          <p>Como você está hoje?</p>
+          <form id="form-humor">
+            <textarea
+              id="observacao-humor"
+              placeholder="Observação (opcional)"
+            ></textarea>
+
+            <div class="humor-icons">
+              <figure data-nivel="3">
+                <img src="./assets/img/feliz.gif" alt="Feliz" />
+                <figcaption>Feliz 😊</figcaption>
+              </figure>
+              <figure data-nivel="4">
+                <img src="./assets/img/muito feliz.gif" alt="Muito feliz" />
+                <figcaption>Muito feliz 😃</figcaption>
+              </figure>
+              <figure data-nivel="2">
+                <img src="./assets/img/neutro.gif" alt="Neutro" />
+                <figcaption>Normal 😐</figcaption>
+              </figure>
+              <figure data-nivel="1">
+                <img src="./assets/img/triste.gif" alt="Triste" />
+                <figcaption>Triste 😢</figcaption>
+              </figure>
+            </div>
+
+            <input type="hidden" id="nivel-humor" required />
+            <button type="submit">Salvar Humor</button>
+          </form>
+        </section>
+
+        <section class="Grafico">
+          <h2>Seu Humor da Semana</h2>
+          <canvas id="graficoHumor"></canvas>
+        </section>
+      </div>
+
+      <div class="col-direita">
+        <section class="Habitos">
+          <h2>Seus Hábitos Diários</h2>
+          <form id="form-habito">
+            <input
+              type="text"
+              id="novo-habito"
+              placeholder="Digite um novo hábito"
+              required
+            />
+            <button type="submit">Adicionar</button>
+          </form>
+          <ul id="lista-habitos"></ul>
+        </section>
+      </div>
+
+      <div class="col-registros">
+        <section class="ListaRegistros">
+          <h2>Registros</h2>
+          <div id="registros"></div>
+        </section>
+
+        <section class="Filtros">
+          <h2>Filtros</h2>
+          <input type="date" id="filtro-data" />
+          <select id="filtro-humor">
+            <option value="">Todos</option>
+            <option value="1">😢</option>
+            <option value="2">😐</option>
+            <option value="3">😊</option>
+            <option value="4">😁</option>
+          </select>
+          <button id="aplicar-filtro">Filtrar</button>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; Todos os direitos reservados 2026</p>
+    </footer>
+
+    <script src="./assets/js/habitos.js"></script>
+  </body>
+</html>
