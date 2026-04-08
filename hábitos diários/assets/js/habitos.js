@@ -1,18 +1,25 @@
-// import { initializeApp } from "https://gstatic.com";
-// import { getFirestore, doc, setDoc, getDoc } from "https://gstatic.com";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCMbrhYrFV_NEPJ6phCUpFx_XhdBGI_xdU",
-//   authDomain: "habitos-diarios-7b2ab.firebaseapp.com",
-//   projectId: "habitos-diarios-7b2ab",
-//   storageBucket: "habitos-diarios-7b2ab.firebasestorage.app",
-//   messagingSenderId: "119949332153",
-//   appId: "1:119949332153:web:523a6f0ef9f7b9de3c1568",
-//   measurementId: "G-SNXX8NM44E",
-// };
+const firebaseConfig = {
+  apiKey: "AIzaSyCMbrhYrFV_NEPJ6phCUpFx_XhdBGI_xdU",
+  authDomain: "habitos-diarios-7b2ab.firebaseapp.com",
+  projectId: "habitos-diarios-7b2ab",
+  storageBucket: "habitos-diarios-7b2ab.appspot.com",
+  messagingSenderId: "119949332153",
+  appId: "1:119949332153:web:523a6f0ef9f7b9de3c1568",
+  measurementId: "G-SNXX8NM44E",
+};
 
-// const app = initializeApp(firebaseConfig);
-// const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
 const nomesHumor = { 1: "Triste", 2: "Neutro", 3: "Feliz", 4: "Muito Feliz" };
 let habitos = [];
