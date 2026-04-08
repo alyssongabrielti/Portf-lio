@@ -8,6 +8,23 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCMbrhYrFV_NEPJ6phCUpFx_XhdBGI_xdU",
+        authDomain: "habitos-diarios-7b2ab.firebaseapp.com",
+        projectId: "habitos-diarios-7b2ab",
+        storageBucket: "habitos-diarios-7b2ab.firebasestorage.app",
+        messagingSenderId: "119949332153",
+        appId: "1:119949332153:web:523a6f0ef9f7b9de3c1568",
+        measurementId: "G-SNXX8NM44E",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
     <header>
       <h1 class="titulo">Monitore seu Humor & Hábitos</h1>
       <p class="subtitulo">Acompanhe seu bem-estar e sua rotina diária!</p>
