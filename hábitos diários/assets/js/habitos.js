@@ -248,7 +248,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const ultimos = registros.slice(-7);
 
-    const labels = ultimos.map((r) => diasSemana[new Date(r.data).getDay()]);
+    const labels = ultimos.map((r) => {
+      const [ano, mes, dia] = r.data.split("-");
+      const dataLocal = new Date(ano, mes - 1, dia);
+      return diasSemana[dataLocal.getDay()];
+    });
     const dados = ultimos.map((r) => r.nivel);
 
     if (grafico) grafico.destroy();
